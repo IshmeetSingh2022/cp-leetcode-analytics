@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: '/progress',   icon: '▲', label: 'Progress'      },
   { to: '/recommend',  icon: '⬡', label: 'Recommend'     },
   { to: '/stats',      icon: '▬', label: 'My Stats'      },
+  { to: '/profile', icon: '◉', label: 'Profile' },
 ]
 
 export default function Sidebar() {

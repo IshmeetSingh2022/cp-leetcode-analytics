@@ -43,3 +43,14 @@ export const statsApi = {
    */
   getUserStats: (userId) => api.get(`/stats/${userId}`),
 }
+
+// Existing code ke end mein add karo:
+
+// ── Profile (/profile) ──────────────────────────────────────────
+export const profileApi = {
+  // GET /profile/me → apna profile data laao
+  getMyProfile: () => api.get('/profile/me'),
+
+  // PUT /profile/cf-handle → Codeforces handle update karo
+  updateCfHandle: (cf_handle) => api.put('/profile/cf-handle', { cf_handle }),
+}
