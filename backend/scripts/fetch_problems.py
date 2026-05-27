@@ -1,8 +1,4 @@
-"""
-Seed the problems table from the Codeforces problem set.
 
-    python -m scripts.fetch_problems
-"""
 
 import sys
 

@@ -25,11 +25,12 @@ def _fetch_and_store(handle: str, db: Session) -> list[Submission]:
         pid = str(item["problem"]["contestId"]) + item["problem"]["index"]
         verdict = item.get("verdict", "")
 
+      
+        if not verdict:
+            continue 
         actual_date = datetime.utcfromtimestamp(
             item["creationTimeSeconds"]
         ).date()
-        if not verdict:
-            continue 
         process_submission(db, handle, pid, tags, verdict,actual_date)
 
     db.commit()

@@ -54,3 +54,8 @@ export const profileApi = {
   // PUT /profile/cf-handle → Codeforces handle update karo
   updateCfHandle: (cf_handle) => api.put('/profile/cf-handle', { cf_handle }),
 }
+// ── Topic Tracker (/topics) ──────────────────────────────────────
+export const topicApi = {
+  // GET /topics/tracker → har topic ka solved status
+  getTracker: () => api.get('/topics/tracker'),
+}

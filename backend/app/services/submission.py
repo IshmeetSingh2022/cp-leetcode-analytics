@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from datetime import date
+from datetime import date, datetime, timezone
 from app.models.submission import Submission
 from app.models.user import User
 from app.services.feedback import update_topic_score
@@ -13,12 +13,8 @@ def process_submission(
     pid: str,
     tags: list[str],
     verdict: str,
-    actual_date:date
+    actual_date: date
 ) -> None:
-    """
-    Store a submission if not already present, then update topic scores
-    and daily stats for the owning user (looked up by handle).
-    """
     existing = (
         db.query(Submission)
         .filter_by(problem_id=pid, handle=handle)
@@ -34,21 +30,23 @@ def process_submission(
         tags=",".join(tags),
         handle=handle,
         mistake_type=get_mistake_type(verdict),
+        # ✅ actual_date ko datetime mein convert karke created_at mein set karo
+        created_at=datetime(
+            actual_date.year,
+            actual_date.month,
+            actual_date.day,
+            tzinfo=timezone.utc   # timezone aware banana zaroori hai — column timezone=True hai
+        ),
     )
 
-    # Link to registered user if one exists
     user: User | None = db.query(User).filter_by(username=handle).first()
     if user:
         submission.user_id = user.id
 
     db.add(submission)
-    
-      
-    
-   
+
     if user:
         for tag in tags:
             update_topic_score(db, user.id, tag, verdict)
 
-        update_daily(db, user.id, verdict,actual_date)
-   
+        update_daily(db, user.id, verdict, actual_date)

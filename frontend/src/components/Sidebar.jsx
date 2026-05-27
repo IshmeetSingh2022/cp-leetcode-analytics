@@ -1,16 +1,16 @@
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { RatingBadge } from './UI'
-
+// NAV_ITEMS array mein add karo — Profile ke baad:
 const NAV_ITEMS = [
-  { to: '/',           icon: '◈', label: 'Dashboard'     },
-  { to: '/analysis',   icon: '◎', label: 'Analysis'      },
-  { to: '/progress',   icon: '▲', label: 'Progress'      },
-  { to: '/recommend',  icon: '⬡', label: 'Recommend'     },
-  { to: '/stats',      icon: '▬', label: 'My Stats'      },
-  { to: '/profile', icon: '◉', label: 'Profile' },
+  { to: '/',          icon: '◈', label: 'Dashboard'     },
+  { to: '/analysis',  icon: '◎', label: 'Analysis'      },
+  { to: '/progress',  icon: '▲', label: 'Progress'      },
+  { to: '/recommend', icon: '⬡', label: 'Recommend'     },
+  { to: '/stats',     icon: '▬', label: 'My Stats'      },
+  { to: '/profile',   icon: '◉', label: 'Profile'       },
+  { to: '/topics',    icon: '☰', label: 'Topic Tracker' },  // ✅ NAYA
 ]
-
 export default function Sidebar() {
   const { username, logout } = useAuth()
 
